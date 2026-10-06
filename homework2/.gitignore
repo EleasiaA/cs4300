@@ -1,0 +1,4 @@
+venv_hw2/
+__pycache__/
+*.pyc
+db.sqlite3
