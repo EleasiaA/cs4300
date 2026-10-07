@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['app-goldenotter4734-28.lab.devedu.io']
 
+CSRF_TRUSTED_ORIGINS = ['https://app-goldenotter4734-28.lab.devedu.io']
+
 
 # Application definition
 
