@@ -1,11 +1,17 @@
 from rest_framework.routers import DefaultRouter
 from django.urls import path, include
-from .views import MovieViewSet, SeatViewSet, BookingViewSet
+from . import views
 
 router = DefaultRouter()
-router.register(r"movies", MovieViewSet)
-router.register(r"seats", SeatViewSet)
-router.register(r"bookings", BookingViewSet, basename='booking')
+router.register(r"movies", views.MovieViewSet)
+router.register(r"seats", views.SeatViewSet)
+router.register(r"bookings", views.BookingViewSet, basename='booking')
 
 
-urlpatterns = [path('', include(router.urls))]
+urlpatterns = [
+    #HTML pages
+    path('', views.movie_list, name='movie_list'),
+    path(book/<int:movie_id>/, views.book_seat, name='book_seat'),
+    #REST API
+    path('api/', include(router.urls)),
+    ]

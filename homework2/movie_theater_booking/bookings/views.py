@@ -8,6 +8,15 @@ from .serializers import MovieSerializer, SeatSerializer, BookingSerializer
 
 # Create your views here.
 
+def movie_list(request):
+    #Render the page listing all movies
+    movies = Movie.objects.all()
+    return render(request, 'bookings/movie_list.html', {'movies': movies})
+
+def book_seat(request, movie_id):
+    #Render the page where user books seat
+    
+
 class MovieViewSet(viewsets.ModelViewSet):
     #CRUD operations for movies
     queryset = Movie.objects.all()
