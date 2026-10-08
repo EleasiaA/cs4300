@@ -124,6 +124,7 @@ STATIC_URL = 'static/'
 LOGIN_URL = '/api-auth/login/'
 #Where users land after logging in when there's no next page
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Email

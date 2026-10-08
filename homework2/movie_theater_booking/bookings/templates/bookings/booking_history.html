@@ -1,0 +1,30 @@
+{% extends 'bookings/base.html' %}
+{% block title %}My Bookings{% endblock %}
+{% block content %}
+<h2>My Bookings</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Movie</th>
+      <th>Seat</th>
+      <th>Booked on</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for booking in bookings %}
+    <tr>
+      <td>{{ booking.movie.title }}</td>
+      <td>{{ booking.seat.seat_number }}</td>
+      <td>{{ booking.booking_date|date:"M j, Y, g:i A" }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="3" class="text-center">You haven't booked anything yet.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a href="{% url 'movie_list' %}" class="btn btn-primary">Browse Movies</a>
+{% endblock %}

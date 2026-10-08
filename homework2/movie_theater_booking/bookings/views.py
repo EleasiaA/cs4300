@@ -30,9 +30,14 @@ def book_seat(request, movie_id):
             seat.is_booked = True
             seat.save()
         # Change to 'booking_history' once that page exists
-        return redirect('movie_list')
+        return redirect('booking_history')
 
     return render(request, 'bookings/seat_booking.html', {'movie': movie, 'seats': available_seats})
+
+@login_required
+def booking_history(request):
+    bookings = Booking.objects.filter(user=request.user).select_related('movie', 'seat').order_by('-booking_date')
+    return render(request, 'bookings/booking_history.html', {'bookings': bookings})
 
 
 class MovieViewSet(viewsets.ModelViewSet):
