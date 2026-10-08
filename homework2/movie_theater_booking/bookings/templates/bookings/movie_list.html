@@ -8,6 +8,8 @@
     <h5>{{ movie.title }}</h5>
     <p>{{ movie.description }}</p>
     <a href="{% url 'book_seat' movie.id %}" class="btn btn-primary">Book Now</a>
+    {% empty %}
+    <li class="list-group-item">No movies in the database yet.</li>
   {% endfor %}
 </ul>
 {% endblock %}

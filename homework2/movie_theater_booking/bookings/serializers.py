@@ -18,6 +18,7 @@ class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
         fields = '__all__'
+        read_only_fields = ['user', 'booking_date']
 
     #Rejects booking if the seat is already taken
     def validate_seat(self, seat):

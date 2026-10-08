@@ -36,6 +36,7 @@ def book_seat(request, movie_id):
 
 @login_required
 def booking_history(request):
+    #Render the page listing booking history
     bookings = Booking.objects.filter(user=request.user).select_related('movie', 'seat').order_by('-booking_date')
     return render(request, 'bookings/booking_history.html', {'bookings': bookings})
 
