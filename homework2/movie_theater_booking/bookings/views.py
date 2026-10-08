@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from django.db import transaction
+from django.contrib.auth.decorators import login_required
 
 from .models import Movie, Seat, Booking
 from .serializers import MovieSerializer, SeatSerializer, BookingSerializer
@@ -13,9 +14,26 @@ def movie_list(request):
     movies = Movie.objects.all()
     return render(request, 'bookings/movie_list.html', {'movies': movies})
 
+@login_required
 def book_seat(request, movie_id):
     #Render the page where user books seat
+    movie = get_object_or_404(Movie, pk=movie_id)
+    available_seats = Seat.objects.filter(is_booked=False)
     
+    if request.method == 'POST':
+        #Only accept a seat that is still unbooked
+        seat = get_object_or_404(Seat, pk=request.POST.get('seat'), is_booked=False)
+
+        #Create the booking and mark the seat as booked together
+        with transaction.atomic():
+            Booking.objects.create(movie=movie, seat=seat, user=request.user)
+            seat.is_booked = True
+            seat.save()
+        # Change to 'booking_history' once that page exists
+        return redirect('movie_list')
+
+    return render(request, 'bookings/seat_booking.html', {'movie': movie, 'seats': available_seats})
+
 
 class MovieViewSet(viewsets.ModelViewSet):
     #CRUD operations for movies

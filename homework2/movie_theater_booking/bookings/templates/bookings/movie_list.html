@@ -7,8 +7,7 @@
   <li class="list-group-item">
     <h5>{{ movie.title }}</h5>
     <p>{{ movie.description }}</p>
-    <a href="#" class="btn btn-primary">Book Now</a>
-  </li>
+    <a href="{% url 'book_seat' movie.id %}" class="btn btn-primary">Book Now</a>
   {% endfor %}
 </ul>
 {% endblock %}

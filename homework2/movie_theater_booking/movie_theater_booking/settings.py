@@ -120,6 +120,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+#Sends people to log in page 
+LOGIN_URL = '/api-auth/login/'
+#Where users land after logging in when there's no next page
+LOGIN_REDIRECT_URL = '/'
+
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration

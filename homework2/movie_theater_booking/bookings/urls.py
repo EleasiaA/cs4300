@@ -11,7 +11,7 @@ router.register(r"bookings", views.BookingViewSet, basename='booking')
 urlpatterns = [
     #HTML pages
     path('', views.movie_list, name='movie_list'),
-    path(book/<int:movie_id>/, views.book_seat, name='book_seat'),
+    path('book/<int:movie_id>/', views.book_seat, name='book_seat'),
     #REST API
     path('api/', include(router.urls)),
     ]
