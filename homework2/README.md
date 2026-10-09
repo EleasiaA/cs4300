@@ -93,7 +93,7 @@ All commands are run from the folder that contains `manage.py` (`homework2/movie
 6. Log in (the **Log in** link in the navbar, or `/api-auth/login/`), then add data:
    - Add movies at `/api/movies/`
    - Add seats at `/api/seats/` (leave **Is booked** unchecked)
-7. Load sample data (15 movies and 32 seats;   safe to run repeatedly). 'build.sh' runs it on each Render deploy:
+7. Load sample data (15 movies and 32 seats;   safe to run repeatedly). `build.sh` runs it on each Render deploy:
    ```bash
    python manage.py seed_movies
    ```
@@ -120,7 +120,7 @@ All commands are run from the folder that contains `manage.py` (`homework2/movie
 
 Creating a booking through the API sets the user from the logged-in account, marks the seat as booked, and returns a `400` error if the seat is already booked.
 
-> Note: Bookings can be created, viewed, and cancelled (DELETE), but not edited. PUT and PATCH return 405.
+> Note: Bookings can be created, viewed, and cancelled (DELETE), but not edited. `PUT` and `PATCH` return `405`.
 
 ## Running the Tests
 
@@ -177,8 +177,8 @@ I used **Claude (Anthropic)** as a guide while completing this assignment. It wa
 - **Testing:** the unit tests, API integration tests, and Behave feature and step files.
 - **Deployment:** guidance on Render configuration, WhiteNoise, PostgreSQL via `dj-database-url`, `build.sh`, and `requirements.txt`, based on Render's Django deployment guide.
 - **UI:** the Bootswatch theme, icon, and card-grid markup for the templates.
-- **Sample data:** the 'seed_movies' management command and its sample movie descriptions.
-- **Bug fixes:** 'perform_destroy' to free seats on cancellation, and disabiling booking edits.
+- **Sample data:** the `seed_movies` management command and its sample movie descriptions.
+- **Bug fixes:** `perform_destroy` to free seats on cancellation, and disabiling booking edits.
 - **Review:** used Paradot to review work.
 
 I reviewed, ran, and tested all AI-generated code and fixed errors that came up while integrating it.
