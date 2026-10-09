@@ -14,6 +14,7 @@ A Django and Django REST Framework application for browsing movies, booking seat
 - Full CRUD for movies through the API
 - Login and logout from the navigation bar
 - Validation that prevents booking a seat that is already taken
+-The interface uses the Bootswatch "Darkly" theme, Boostrap Icons, and a card grid for movies.
 
 ## Project Structure
 
@@ -48,6 +49,8 @@ homework2/
         features/                  (Behave BDD tests)
             booking.feature
             steps/booking_steps.py
+            management/commands
+               seed_movies.py
 ```
 
 ## Models
@@ -90,6 +93,8 @@ All commands are run from the folder that contains `manage.py` (`homework2/movie
 6. Log in (the **Log in** link in the navbar, or `/api-auth/login/`), then add data:
    - Add movies at `/api/movies/`
    - Add seats at `/api/seats/` (leave **Is booked** unchecked)
+7. Load sample data (15 movies and 32 seats; safe to run repeatedly). 'build.sh' runs it on each Render deploy:
+   python manage.py seed_movies
 
 ## Web Pages
 
@@ -112,6 +117,8 @@ All commands are run from the folder that contains `manage.py` (`homework2/movie
 | `/api/bookings/<id>/` | Retrieve, update, or delete one of your bookings |
 
 Creating a booking through the API sets the user from the logged-in account, marks the seat as booked, and returns a `400` error if the seat is already booked.
+
+> Note: Bookings can be created, viewed, and cancelled (DELETE), but not edited. PUT and PATCH return 405.
 
 ## Running the Tests
 
@@ -153,6 +160,8 @@ Password: throwaway
 
 - **A seat's booked status is global.** `Seat.is_booked` is a single flag that is not tied to a movie or showtime, so booking a seat for one movie makes it unavailable for every movie. A more realistic design would add a Showtime model and check bookings per showtime.
 - Bookings cannot currently be cancelled from the web interface (they can be deleted through the API).
+- The movie and seat API endpoints have no permission checks, so anyone can create, edit, or delete movies and seats. Booking endpoints require login and only expose a user's own bookings.
+- The free Render tier sleeps when idle
 
 ## AI Usage Disclosure
 
@@ -165,5 +174,9 @@ I used **Claude (Anthropic)** as a guide while completing this assignment. It wa
 - **Settings and debugging:** help diagnosing errors 
 - **Testing:** the unit tests, API integration tests, and Behave feature and step files.
 - **Deployment:** guidance on Render configuration, WhiteNoise, PostgreSQL via `dj-database-url`, `build.sh`, and `requirements.txt`, based on Render's Django deployment guide.
+- **UI:** the Bootswatch theme, icon, and card-grid markup for the templates.
+- **Sample data:** the 'seed_movies' management command and its sample movie descriptions.
+- **Bug fixes:** 'perform_destroy' to free seats on cancellation, and disabiling booking edits.
+- **Review:** used Paradot to review work.
 
 I reviewed, ran, and tested all AI-generated code and fixed errors that came up while integrating it.
