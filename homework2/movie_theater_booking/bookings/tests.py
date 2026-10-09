@@ -1,5 +1,7 @@
 from datetime import date
 
+from io import StringIO
+from django.core.management import call_command
 from django.contrib.auth import get_user_model
 from django.db import IntegrityError, transaction
 from django.db.models import ProtectedError
@@ -240,3 +242,11 @@ class BookingAPITests(APITestCase):
         self.assertEqual(response.status_code, 204)
         self.seat.refresh_from_db()
         self.assertFalse(self.seat.is_booked)
+
+class SeedCommandTests(TestCase):
+    def test_seed_loads_data_and_is_repeatable(self):
+        call_command("seed_movies", stdout=StringIO())
+        call_command("seed_movies", stdout=StringIO())  # second run adds nothing
+        self.assertEqual(Movie.objects.count(), 15)
+        self.assertEqual(Seat.objects.count(), 32)
+        self.assertFalse(Seat.objects.filter(is_booked=True).exists())

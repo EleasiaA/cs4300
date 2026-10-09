@@ -97,7 +97,7 @@ All commands are run from the folder that contains `manage.py` (`homework2/movie
 |---|---|
 | `/` | Movie list |
 | `/book/<movie_id>/` | Seat booking for a movie (login required) |
-| `/bookings/history/` | The logged-in user's booking history (login required) |
+| `/booking/history/` | The logged-in user's booking history (login required) |
 | `/admin/` | Django admin |
 
 ## API Endpoints
@@ -116,7 +116,7 @@ Creating a booking through the API sets the user from the logged-in account, mar
 ## Running the Tests
 
 ```bash
-# Unit and API integration tests (30 tests)
+# Unit and API integration tests (32 tests)
 python manage.py test
 
 # Behave (BDD) tests
@@ -131,7 +131,7 @@ coverage report --include="bookings/*" --omit="bookings/migrations/*"
 - **Unit tests** cover the models (string output, unique seat numbers, default values, delete rules) and the page views (login redirects, booking, history).
 - **Integration tests** use DRF's `APITestCase` to check status codes and JSON for the movie, seat, and booking endpoints, including the `400` for double booking and authentication requirements.
 - **BDD tests** (Behave) describe booking an available seat and being rejected when booking a taken seat.
-- Test coverage: **YOUR_COVERAGE_PERCENT%** for the `bookings` app.
+- Test coverage: **100%** for the `bookings` app.
 
 ## Deployment (Render)
 
