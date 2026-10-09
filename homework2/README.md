@@ -163,7 +163,7 @@ Password: throwaway
 - **A seat's booked status is global.** `Seat.is_booked` is a single flag that is not tied to a movie or showtime, so booking a seat for one movie makes it unavailable for every movie. A more realistic design would add a Showtime model and check bookings per showtime.
 - Bookings cannot currently be cancelled from the web interface (they can be deleted through the API).
 - The movie and seat API endpoints have no permission checks, so anyone can create, edit, or delete movies and seats. Booking endpoints require login and only expose a user's own bookings.
-- The free Render tier sleeps when idle
+- The free Render tier sleeps when idle.
 
 ## AI Usage Disclosure
 
