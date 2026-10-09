@@ -4,29 +4,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Movie Theater{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootswatch "Darkly" theme (a drop-in replacement for Bootstrap's CSS) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/darkly/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   </head>
   <body>
     <!-- Navigation bar, shown on every page -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
       <div class="container">
-        <a class="navbar-brand" href="{% url 'movie_list' %}">Movie Theater</a>
-        <div class="navbar-nav ms-auto">
+        <a class="navbar-brand" href="{% url 'movie_list' %}">
+          <i class="bi bi-film"></i> Movie Theater
+        </a>
+        <div class="navbar-nav ms-auto align-items-lg-center">
           <a class="nav-link" href="{% url 'movie_list' %}">Movies</a>
           <a class="nav-link" href="{% url 'booking_history' %}">My Bookings</a>
           {% if user.is_authenticated %}
-            <span class="navbar-text ms-3">Hi, {{ user.username }}</span>
-            <form method="post" action="{% url 'rest_framework:logout' %}" class="d-inline ms-2">              {% csrf_token %}
+            <span class="navbar-text ms-lg-3">
+              <i class="bi bi-person-circle"></i> {{ user.username }}
+            </span>
+            <form method="post" action="{% url 'rest_framework:logout' %}" class="d-inline ms-lg-2">
+              {% csrf_token %}
               <button type="submit" class="btn btn-outline-light btn-sm">Log out</button>
             </form>
           {% else %}
-            <a class="nav-link" href="{% url 'rest_framework:login' %}">Log in</a>          {% endif %}
+            <a class="nav-link" href="{% url 'rest_framework:login' %}">Log in</a>
+          {% endif %}
         </div>
       </div>
     </nav>
 
     <!-- Page content goes inside this container -->
-    <div class="container mt-4">
+    <div class="container mt-4 mb-5">
       {% block content %}{% endblock %}
     </div>
 
