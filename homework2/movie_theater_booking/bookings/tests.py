@@ -230,3 +230,13 @@ class BookingAPITests(APITestCase):
         response = self.client.get("/api/bookings/")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 1)
+
+    def test_deleting_booking_frees_seat(self):
+        self.client.force_login(self.user)
+        self.client.post("/api/bookings/",
+                         {"movie": self.movie.id, "seat": self.seat.id}, format="json")
+        booking = Booking.objects.get()
+        response = self.client.delete(f"/api/bookings/{booking.id}/")
+        self.assertEqual(response.status_code, 204)
+        self.seat.refresh_from_db()
+        self.assertFalse(self.seat.is_booked)

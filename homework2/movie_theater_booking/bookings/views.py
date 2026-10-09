@@ -66,4 +66,11 @@ class BookingViewSet(viewsets.ModelViewSet):
             booking = serializer.save(user=self.request.user)
             booking.seat.is_booked = True
             booking.seat.save()
-
+    
+    def perform_destroy(self, instance):
+        # Delete the booking and free its seat together
+        with transaction.atomic():
+            seat = instance.seat
+            instance.delete()
+            seat.is_booked = False
+            seat.save()
