@@ -54,6 +54,7 @@ class SeatViewSet(viewsets.ModelViewSet):
 class BookingViewSet(viewsets.ModelViewSet):
     #Create bookings and view the logged-in user's booking history
     permission_classes = [IsAuthenticated]
+    http_method_names = ['get', 'post', 'delete', 'head', 'options']
     serializer_class = BookingSerializer
 
     def get_queryset(self):

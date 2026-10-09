@@ -116,7 +116,7 @@ Creating a booking through the API sets the user from the logged-in account, mar
 ## Running the Tests
 
 ```bash
-# Unit and API integration tests (32 tests)
+# Unit and API integration tests (33 tests)
 python manage.py test
 
 # Behave (BDD) tests

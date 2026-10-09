@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-abc123...long-random-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ   # True on DevEdu, False on Render
 
-ALLOWED_HOSTS = ['.devedu.io']
+ALLOWED_HOSTS = ['.devedu.io', 'localhost', '127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS = ['https://*.devedu.io']
 

@@ -243,6 +243,14 @@ class BookingAPITests(APITestCase):
         self.seat.refresh_from_db()
         self.assertFalse(self.seat.is_booked)
 
+    def test_booking_cannot_be_edited(self):
+        self.client.force_login(self.user)
+        self.client.post("/api/bookings/", {"movie": self.movie.id, "seat": self.seat.id}, format="json")
+        booking = Booking.objects.get()
+        other = Seat.objects.create(seat_number="B1")
+        response = self.client.patch(f"/api/bookings/{booking.id}/", {"seat": other.id}, format="json")
+        self.assertEqual(response.status_code, 405)
+
 class SeedCommandTests(TestCase):
     def test_seed_loads_data_and_is_repeatable(self):
         call_command("seed_movies", stdout=StringIO())
