@@ -144,6 +144,11 @@ The app is deployed as a Render Web Service backed by a Render PostgreSQL databa
 - Static files are served with WhiteNoise.
 - `settings.py` reads `SECRET_KEY` and the database from environment variables, and uses the `RENDER_EXTERNAL_HOSTNAME` variable to configure `ALLOWED_HOSTS` and `CSRF_TRUSTED_ORIGINS`. Locally it falls back to SQLite with `DEBUG` on.
 
+## Logging in to the live site
+Username: grader
+Password: throwaway
+(Browsing movies works without logging in. Booking a seat and viewing My Bookings require login.)
+
 ## Known Limitations
 
 - **A seat's booked status is global.** `Seat.is_booked` is a single flag that is not tied to a movie or showtime, so booking a seat for one movie makes it unavailable for every movie. A more realistic design would add a Showtime model and check bookings per showtime.
