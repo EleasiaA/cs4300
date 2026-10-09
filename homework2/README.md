@@ -93,8 +93,10 @@ All commands are run from the folder that contains `manage.py` (`homework2/movie
 6. Log in (the **Log in** link in the navbar, or `/api-auth/login/`), then add data:
    - Add movies at `/api/movies/`
    - Add seats at `/api/seats/` (leave **Is booked** unchecked)
-7. Load sample data (15 movies and 32 seats; safe to run repeatedly). 'build.sh' runs it on each Render deploy:
+7. Load sample data (15 movies and 32 seats;   safe to run repeatedly). 'build.sh' runs it on each Render deploy:
+   ```bash
    python manage.py seed_movies
+   ```
 
 ## Web Pages
 
