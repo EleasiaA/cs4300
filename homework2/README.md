@@ -97,7 +97,7 @@ All commands are run from the folder that contains `manage.py` (`homework2/movie
 |---|---|
 | `/` | Movie list |
 | `/book/<movie_id>/` | Seat booking for a movie (login required) |
-| `/booking/history/` | The logged-in user's booking history (login required) |
+| `/bookings/history/` | The logged-in user's booking history (login required) |
 | `/admin/` | Django admin |
 
 ## API Endpoints

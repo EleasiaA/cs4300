@@ -12,7 +12,7 @@ urlpatterns = [
     #HTML pages
     path('', views.movie_list, name='movie_list'),
     path('book/<int:movie_id>/', views.book_seat, name='book_seat'),
-    path('booking/history/', views.booking_history, name='booking_history'),
+    path('bookings/history/', views.booking_history, name='booking_history'),
     #REST API
     path('api/', include(router.urls)),
     ]
