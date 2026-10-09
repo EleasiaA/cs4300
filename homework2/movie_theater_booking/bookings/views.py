@@ -18,7 +18,7 @@ def movie_list(request):
 def book_seat(request, movie_id):
     #Render the page where user books seat
     movie = get_object_or_404(Movie, pk=movie_id)
-    available_seats = Seat.objects.filter(is_booked=False)
+    available_seats = Seat.objects.filter(is_booked=False).order_by('seat_number')
     
     if request.method == 'POST':
         #Only accept a seat that is still unbooked
@@ -43,12 +43,12 @@ def booking_history(request):
 
 class MovieViewSet(viewsets.ModelViewSet):
     #CRUD operations for movies
-    queryset = Movie.objects.all()
+    queryset = Movie.objects.all().order_by('title')
     serializer_class = MovieSerializer
 
 class SeatViewSet(viewsets.ModelViewSet):
     #Seat availability and management
-    queryset = Seat.objects.all()
+    queryset = Seat.objects.all().order_by('seat_number')
     serializer_class = SeatSerializer
 
 class BookingViewSet(viewsets.ModelViewSet):
